@@ -43,7 +43,7 @@ for (let i=0; i<pokemonList.length; i++){
 console.log(tallestPokemon);
 console.log(shortestPokemon);
 
-let tallPokemonComment = "Wow, this pokemon has stilts for legs!";
+let tallPokemonComment = "Wow, this pokemon is the tallest of the bunch!";
 let smallPokemonComment = "Small. but MIGHTY!";
 
 for (let i=0; i<pokemonList.length; i++){
