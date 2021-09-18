@@ -1,70 +1,60 @@
-let pokemonList = [
-    {
-        name: 'Pikachu', 
-        height: 1.3, 
-        type: 'electric'
-    },
-    {
-        name: 'Charizard',
-        height: 5.5,
-        type: ['fire', 'flying']
-    },
-    {
-        name: 'Venusaur', 
-        height: 6.5,
-        type: 'electric'
-    },
-    {
-        name: 'Squirtle',
-        height: 1.6,
-        type: ['grass', 'poison']
-    }
-];
+let pokemonRepository = (function(){
+    let pokemonList = [
+        {
+            name: 'Pikachu', 
+            height: 1.3, 
+            type: 'electric',
+        },
+        {
+            name: 'Charizard',
+            height: 5.5,
+            type: ['fire', 'flying'],
+        },
+        {
+            name: 'Venusaur', 
+            height: 6.5,
+            type: 'electric',
+        },
+        {
+            name: 'Squirtle',
+            height: 1.6,
+            type: ['grass', 'poison']
+        }
+        ];
 
-let tallestPokemon = 0;
-let shortestPokemon = 0;
+   function add(pokemon){   
+    pokemonList.push(pokemon);
+   }
 
-for (let i=0; i<pokemonList.length; i++){
-    // Initialize height variables with height of first pokemon in array
-    if(i==0){
-        tallestPokemon = pokemonList[0].height;
-        shortestPokemon = pokemonList[0].height;
-    }
-    // Find tallest pokemon height
-    if(pokemonList[i].height>tallestPokemon){
-        tallestPokemon = pokemonList[i].height;
-    }
-    // Find shortest pokemon height
-    if(pokemonList[i].height<shortestPokemon){
-        shortestPokemon = pokemonList[i].height;
-    }
-};
+   function getAll(){
+       return pokemonList;
+   }
 
-console.log(tallestPokemon);
-console.log(shortestPokemon);
+   function displayList(list) {
+        if (typeof list !== 'object'){
+            alert('input not an object')
+            return
+        }
+        let name = list.name;
+        let height = list.height;
+        let type = list.type;
+        let selectContainer = document.getElementById("pokemon-container");
+        let div = document.createElement('div');
+        let content = document.createTextNode(name + ' ' + '(' + 'Height: ' + height + ' ' + 'Type: ' + type + ')');
+        div.className = 'grid-item';
+        div.appendChild(content);
+        selectContainer.appendChild(div);
+   }
 
-let tallPokemonComment = "Wow, this pokemon is the tallest of the bunch!";
-let smallPokemonComment = "Small, but MIGHTY!";
+   return {
+    add: add,
+    getAll: getAll,
+    displayList: displayList
+   };
+})();
 
-for (let i=0; i<pokemonList.length; i++){
-    // add opening <ul> tag
-    if (i<1){
-        document.write('<ul>');
-    };
+pokemonRepository.add({name: 'Wartortle', height: 3.03, type: 'water'})
 
-    // Add items <li> to <ul>. Add comments for shortest and tallest pokemon based on their height.
-    if(pokemonList[i].height==tallestPokemon){
-        document.write('<li>' + pokemonList[i].name +' '+ `(Height:${pokemonList[i].height})`+ `--${tallPokemonComment}` +'</li>');
-    }
-    else if(pokemonList[i].height==shortestPokemon){
-        document.write('<li>' + pokemonList[i].name +' '+ `(Height:${pokemonList[i].height})`+ `--${smallPokemonComment}` +'</li>');
-    }
-    else {
-        document.write('<li>' + pokemonList[i].name +' '+ `(Height:${pokemonList[i].height})`+ '</li>');
-    }
-
-    // add closing </ul> tag
-    if (i==pokemonList.length){
-        document.write('</ul>');
-    }
-};
+pokemonRepository.getAll().forEach(function(pokemon){
+    pokemonRepository.displayList(pokemon);
+});
