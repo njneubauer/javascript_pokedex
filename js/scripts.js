@@ -68,7 +68,7 @@ let pokemonRepository = (function(){
 
 // Test to add pokemon to pokemonList
 pokemonRepository.addPokemon({name: 'Wartortle', height: 3.03, type: 'water'})
-pokemonRepository.addPokemon("squirtle")
+
 // loop through pokemonList and display as HTML
 pokemonRepository.getAll().forEach(function(pokemon){
     pokemonRepository.addListItem(pokemon);
