@@ -22,39 +22,50 @@ let pokemonRepository = (function(){
         }
         ];
 
-   function add(pokemon){   
-    pokemonList.push(pokemon);
+    function addPokemon(pokemon){
+        pokemonList.push(pokemon);
    }
 
-   function getAll(){
+    function getAll(){
        return pokemonList;
    }
 
-   function displayList(list) {
-        if (typeof list !== 'object'){
+    function addListItem(pokemon) {
+        // Check if pokemon is an object
+        if (typeof pokemon !== 'object'){
             alert('input not an object')
             return
         }
-        let name = list.name;
-        let height = list.height;
-        let type = list.type;
-        let selectContainer = document.getElementById("pokemon-container");
-        let div = document.createElement('div');
-        let content = document.createTextNode(name + ' ' + '(' + 'Height: ' + height + ' ' + 'Type: ' + type + ')');
-        div.className = 'grid-item';
-        div.appendChild(content);
-        selectContainer.appendChild(div);
+        let name = pokemon.name;
+        let selectUl = document.getElementsByClassName('pokemon-list')[0];
+        let li = document.createElement('li')
+        let button = document.createElement('button')
+        // add event listener to button
+        button.addEventListener('click', function(){showDetails(pokemon)});
+        // add name to button
+        button.innerText = name;
+        // add button to li element
+        li.appendChild(button);
+        // add li element to ul list
+        selectUl.appendChild(li);
+   }
+
+    function showDetails(pokemon){
+        let name = pokemon.name;
+        console.log(name);
    }
 
    return {
-    add: add,
+    addPokemon: addPokemon,
     getAll: getAll,
-    displayList: displayList
+    addListItem: addListItem
    };
 })();
 
-pokemonRepository.add({name: 'Wartortle', height: 3.03, type: 'water'})
+// Test to add pokemon to pokemonList
+pokemonRepository.addPokemon({name: 'Wartortle', height: 3.03, type: 'water'})
 
+// loop through pokemonList and display as HTML
 pokemonRepository.getAll().forEach(function(pokemon){
-    pokemonRepository.displayList(pokemon);
+    pokemonRepository.addListItem(pokemon);
 });
