@@ -48,3 +48,11 @@ ul {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+#modal-container {
+    display: none;
+}
+  
+#modal-container.is-visible {
+    display: block;
+}
