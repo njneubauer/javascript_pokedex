@@ -3,13 +3,6 @@ body {
     background-color: rgb(243, 243, 176);
 }
 
-#pokemon-container ul{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 20px;
-    justify-items: center;
-}
-
 button {
     height: 50px;
     width: 200px;
@@ -38,12 +31,7 @@ h1 {
     text-align: center;
 }
 
-ul {
-    padding: 0;
-    list-style: none;
-}
-
-.loading-icon{
+.loading-icon {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -75,32 +63,51 @@ ul {
     text-align: center;
 }
 
-  .modal {
+.modal {
     margin: auto;
     display: inline-block;
     box-sizing: border-box;
     background: #fff;
-    padding: 15px;
+    padding: 20px;
     width: 100%;
-    max-width: 700px;
+    max-width: 500px;
     text-align: left;
-  }
-  
-  .modal-close {
+}
+
+.modal-body {
+    display: flex;
+    justify-content: center;
+}
+
+.modal-close {
     float: right;
     -webkit-appearance: none;
     border: 0;
     background: none;
     color: #777;
     text-decoration: underline;
-  }
-  
-  .modal h1 {
+}
+
+.modal h1 {
     margin-top: 0;
     text-transform: capitalize;
-  }
-  
-  .modal p {
-    margin-bottom: 0;
-  }
-  
+}
+
+.modal img {
+    float: left;
+    height: auto;
+    width: 150px;
+    margin: 0;
+}
+    
+#pokemon-container ul{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+    justify-items: center;
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+}

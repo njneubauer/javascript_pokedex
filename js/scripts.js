@@ -100,6 +100,40 @@ let pokemonRepository = (function(){
         showModal(title, img, height, types);
         });
     }
+    
+    function showModal(title, img, height, types){
+        let modalContainer = document.querySelector('#modal-container');
+        
+        let h1 = document.querySelector('div.modal h1.modal-title');
+        let pokemonImg = document.querySelector('img');
+
+        function newLi(x){
+            let li = document.createElement('li');
+            li.innerHTML = x
+            let ul = document.getElementById('pokemon-attributes');
+            return ul.appendChild(li);
+        }
+        
+        // modal content
+        h1.innerHTML = title;
+        pokemonImg.src = img;
+        newLi(`Height: ${height} inches`);
+        newLi(`Types: ${types.join(' & ')}`);
+
+        // show modal
+        modalContainer.classList.add('is-visible');
+    }
+
+    function hideModal(){
+        let modalContainer = document.querySelector('#modal-container');
+        modalContainer.classList.remove('is-visible');
+        let ul = document.getElementById('pokemon-attributes');
+        ul.innerHTML = '';
+    }
+
+    // add event listner to the modal close button
+    var modalButton = document.querySelector('button.modal-close');
+    modalButton.addEventListener('click', hideModal, false);
 
    return {
     addPokemon: addPokemon,
@@ -135,41 +169,4 @@ pokemonRepository.loadList().then(function(){
         pokemonRepository.addListItem(pokemon);
     });
 });
-
-function showModal(title, img, height, types){
-    let modalContainer = document.querySelector('#modal-container');
-    
-    let h1 = document.querySelector('div.modal h1.pokemon-name');
-    let pokemonImg = document.querySelector('img');
-
-    function newLi(x){
-        let li = document.createElement('li');
-        li.innerHTML = x
-        let ul = document.getElementById('pokemon-attributes');
-        return ul.appendChild(li);
-    }
-    
-    // modal content
-    h1.innerHTML = title;
-    pokemonImg.src = img;
-    newLi(`Height: ${height} inches`);
-    newLi(`Types: ${types}`);
-
-    // show modal
-    modalContainer.classList.add('is-visible');
-}
-
-function hideModal(){
-    let modalContainer = document.querySelector('#modal-container');
-    modalContainer.classList.remove('is-visible');
-    let ul = document.getElementById('pokemon-attributes');
-    ul.innerHTML = '';
-}
-
-// add event listner to the modal close button
-var modalButton = document.querySelector('button.modal-close');
-modalButton.addEventListener('click', hideModal, false);
-
-
-
 
