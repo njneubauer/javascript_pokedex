@@ -1,6 +1,42 @@
+:root {
+    --body-background: rgb(255, 242, 125);
+    --button-border: #555;
+    --button-color: rgb(59, 125, 206);
+    --button-text: white;
+    --modal-background: rgba(0, 0, 0, 0.6);
+    --modal-display: #fff;
+    --modal-top-bottom-border: grey;
+    --modal-close: #777;
+}
+
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: rgb(243, 243, 176);
+    background-color: var(--body-background);
+    z-index: 1;
+}
+
+header {
+    position: sticky;
+    position: -webkit-sticky;
+    background-color: var(--body-background);
+    top: 0;
+    z-index: 2;
+}
+
+header h1 {
+    font-size: 50px;
+    text-align: center;
+}
+
+nav ul {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1 1 auto;
+    margin: 0 20px;
+}
+
+nav ul li{
+    margin: 0 20px;
 }
 
 button {
@@ -8,12 +44,12 @@ button {
     width: 200px;
     font-size: medium;
     letter-spacing: 2px;
-    background-color: rgb(61,125,202);
-    color: white;
-    border: 1px solid rgb(0, 58, 112);
-    border-right: 5px solid rgb(0, 58, 112);
-    border-bottom: 5px solid rgb(0,58,112);
-    /* border-radius: 15px 15px; */
+    background-color: var(--button-color);
+    color: var(--button-text);
+    border: 1px solid var(--button-color);
+    border-radius: 5px;
+    border-right: 4px solid var(--button-border);
+    border-bottom: 4px solid var(--button-border);
     text-transform: capitalize;
 }
 
@@ -24,11 +60,6 @@ button:hover {
 
 .grid-item {
     place-self: stretch;
-}
-
-h1 {
-    font-size: 40px;
-    text-align: center;
 }
 
 .loading-icon {
@@ -50,7 +81,7 @@ h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: var(--modal-background);
 
     /* to show it above other content */
     z-index: 999; 
@@ -67,47 +98,75 @@ h1 {
     margin: auto;
     display: inline-block;
     box-sizing: border-box;
-    background: #fff;
-    padding: 20px;
+    background: var(--modal-display);
+    padding: 15px;
     width: 100%;
     max-width: 500px;
     text-align: left;
 }
 
+.modal-close {
+    float: right;
+    height: 50px;
+    width: 50px;
+    padding-bottom: 10px;
+    border: 0;
+    background: none;
+    color: var(--modal-close);
+}
+
 .modal-body {
     display: flex;
     justify-content: center;
+    border-top: 1px solid var(--modal-top-bottom-border);
+    border-bottom: 1px solid var(--modal-top-bottom-border);
 }
 
-.modal-close {
-    float: right;
-    -webkit-appearance: none;
-    border: 0;
-    background: none;
-    color: #777;
-    text-decoration: underline;
+.modal-footer {
+    text-align: center;
+}
+
+.modal-button-close {
+    border: none;
+    width: 100px;
+    height: 40px;
+    margin-top: 10px;
 }
 
 .modal h1 {
     margin-top: 0;
+    margin-left: 5px;
+    margin-bottom: 15px;
     text-transform: capitalize;
 }
 
 .modal img {
     float: left;
+    max-width: 150px;
+    width: 100%;
     height: auto;
-    width: 150px;
-    margin: 0;
+    margin-right: 40px;
 }
     
 #pokemon-container ul{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 20px;
-    justify-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#pokemon-container ul li{
+    margin: 10px 75px;
 }
 
 ul {
     padding: 0;
     list-style: none;
+    line-height: 1.75em;
+}
+
+@media all and (max-width: 426px) {
+    .modal img {
+        margin-right: 10px
+    }
 }
