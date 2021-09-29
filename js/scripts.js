@@ -85,7 +85,7 @@ let pokemonRepository = (function(){
         });
     }
 
-    function showDetails(){
+    function showDetails(pokemon){
         // show pokemon details on click event
         loadDetails(pokemon).then(function(){
             // assign variables to data
