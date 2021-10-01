@@ -76,9 +76,9 @@ let pokemonRepository = (function(){
         }).then(function (details) {
           // Add the details information to the item. This is utilized in showDetails()
           item.imageUrl = details.sprites.front_default;
-          item.id = details.id
+          item.id = details.id;
           item.height = details.height;
-          item.weight = details.weight
+          item.weight = details.weight;
           item.types = details.types;
         }).catch(function (e) {
           console.error(e);
@@ -140,9 +140,25 @@ let pokemonRepository = (function(){
 
     // add event listner to the modal close button
     let modalX = document.querySelector('button.modal-close');
-    let modalButton = document.querySelector('button.modal-button-close')
+    let modalButton = document.querySelector('button.modal-button-close');
+    // Event listeners to close modal
     modalX.addEventListener('click', hideModal, false);
     modalButton.addEventListener('click', hideModal, false);
+    window.addEventListener('keydown', function(e){
+        let modal = document.querySelector('#modal-container');
+        if (e.key === "Escape" && modal.classList.contains('is-visible')){
+            hideModal();
+        }
+    });
+    // Close modal if click outside the modal
+    let modal = document.querySelector('#modal-container');
+    modal.addEventListener('click', function(e){
+        let modalContainer = document.querySelector('#modal-container');
+        target = e.target
+        if (target === modalContainer && modalContainer.classList.contains('is-visible')){
+            hideModal();
+        }
+    });
 
 
    return {
