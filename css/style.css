@@ -153,7 +153,8 @@ button:hover {
     max-width: 150px;
     width: 100%;
     height: auto;
-    margin-right: 40px;
+    margin-right: 10px;
+    padding: 15px 0;
 }
 
 .modal-body {
@@ -161,6 +162,14 @@ button:hover {
     justify-content: center;
     border-top: 1px solid var(--modal-top-bottom-border);
     border-bottom: 1px solid var(--modal-top-bottom-border);
+}
+
+.modal ul {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    list-style-type: none;
+    line-height: 2rem;
 }
 
 .modal-footer {

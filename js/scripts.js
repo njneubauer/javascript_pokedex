@@ -75,7 +75,7 @@ let pokemonRepository = (function(){
           return response.json();
         }).then(function (details) {
           // Add the details information to the item. This is utilized in showDetails()
-          item.imageUrl = details.sprites.front_default;
+          item.imageUrl = details.sprites.other.dream_world.front_default;
           item.id = details.id;
           item.height = details.height;
           item.weight = details.weight;
