@@ -62,6 +62,7 @@ header {
 .btn-styles:hover {
     cursor: pointer;
     opacity: .8;
+    font-weight: bold;
 }
 
 .btn,button,.btn-styles,.navbar-toggler:focus {

@@ -142,7 +142,6 @@ let pokemonRepository = (function(){
     function showDetails(pokemon){
         // show pokemon details on click event
         loadDetails(pokemon).then(function(){
-            console.log(pokemon);
             // assign variables to data
             let name = pokemon.name;
             let img = pokemon.imageUrl;
@@ -157,10 +156,8 @@ let pokemonRepository = (function(){
             });
 
             pokemon.abilities.forEach((item)=>{
-                console.log(item);
                 abilities.push(item.ability.name[0].toUpperCase() + item.ability.name.slice(1))
             });
-            console.log(abilities);
         // pass data into showModal function
         showModal(name, img, id, height, weight, abilities, types);
         });
@@ -200,15 +197,23 @@ let pokemonRepository = (function(){
         attrCol.classList.add('d-flex');
         attrCol.classList.add('align-self-center');
         
+        // get screen width
+        function screenWidth(){
+            let screenWidth = window.innerWidth
+            || document.documentElement.clientWidth
+            || document.body.clientWidth;
+            return screenWidth;
+        }
+
         // Change how pokemon attr list is styled based on screen size
-        if (screen.width < 576){
+        if (screenWidth() < 576){
             attrCol.classList.add('justify-content-center');
         }
         else {
             attrCol.classList.add('justify-content-start');
         }
         window.addEventListener('resize', function(){
-            if (screen.width < 576){
+            if (screenWidth() < 576){
                 attrCol.classList.remove('justify-content-start');
                 attrCol.classList.add('justify-content-center');
             }
