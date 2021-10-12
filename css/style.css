@@ -23,21 +23,17 @@ header {
     background-color: var(--body-background);
     top: 0;
     z-index: 2;
-    text-align: center;
 }
 
 #title {
     display: block;
     width: 100%;
     text-align: center;
+    padding-top: 5px;
 }
 
 .pokemon-logo {
     height: 90px;
-}
-
-nav {
-    height: 55px;
 }
 
 #poke-list li{
@@ -68,7 +64,7 @@ nav {
     opacity: .8;
 }
 
-.btn-styles:focus {
+.btn,button,.btn-styles,.navbar-toggler:focus {
     box-shadow: none;
 }
 
@@ -80,11 +76,15 @@ nav {
 }
 
 .modal {
-    margin-top: 100px;
+    margin-top: 50px;
 }
 
 .modal-title {
     text-transform: capitalize;
+}
+
+.modal-body {
+    padding: 0;
 }
 
 .modal-body img {
@@ -94,10 +94,15 @@ nav {
     padding: 15px 0;
 }
 
-.modal-body ul {
+.modal-body ul li{
     margin: 0;
-    padding: 0;
+    padding: 5px 0;
+    width: 180px;
     text-align: left;
     list-style-type: none;
-    line-height: 2rem; 
+}
+
+.abilities {
+    line-height: normal;
+    word-wrap: normal;
 }

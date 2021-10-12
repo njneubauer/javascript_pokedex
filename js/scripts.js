@@ -2,10 +2,13 @@ let pokemonRepository = (function(){
     let pokemonList = [];
     let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=150'
 
+    // select search bar
     const searchBar = document.getElementById('search-bar');
+
     // Event listener to filter pokemon buttons
     searchBar.addEventListener('input', filterPokemon);
 
+    // filter pokemon based on input from user
     function filterPokemon(){
         let pokemonList = document.querySelectorAll('.list-group-item');
         // make input lowercase for comparison using indexOf()
@@ -22,10 +25,11 @@ let pokemonRepository = (function(){
         });
     }
     
-    // Reset search bar
+    // reset search bar event listener
     let reset = document.getElementById('reset-btn');
     reset.addEventListener('click', resetFilter);
 
+    // reset search bar filter
     function resetFilter(){
         searchBar.value = '' 
         let pokemonList = document.querySelectorAll('.group-list-item');
@@ -33,7 +37,8 @@ let pokemonRepository = (function(){
             pokemon.style.display = ''
         }));
     }
-        
+    
+    // add pokemon to pokemonList array
     function addPokemon(pokemon){
         // Check if pokemon is an object
         if (typeof pokemon !== 'object'){
@@ -49,20 +54,22 @@ let pokemonRepository = (function(){
         return pokemonList;
     }
 
+    // add buttons with pokemon name
     function addButtons(pokemon){
         let name = pokemon.name;
         let selectUl = document.getElementById('poke-list');
+        // add classes to ul for bootstrap
         selectUl.classList.add('row', 'row-cols-auto')
         let li = document.createElement('li');
+        // add classes to each li for bootstrap
         li.classList.add(
             'list-group-item',
             'col'
-            // 'col-xl-3',
-            // 'col-lg-4',
-            // 'col-md-6'
         );
-
+        
+        // create buttons
         let button = document.createElement('button');
+        // add classes and necessary attributes to buttons
         button.classList.add('btn','btn-styles');
         button.setAttribute('data-bs-toggle', 'modal');
         button.setAttribute('data-bs-target', '#modal');
@@ -89,6 +96,7 @@ let pokemonRepository = (function(){
         element[0].parentNode.removeChild(element[0]);
     }
 
+    // get pokemon details from API and store in pokemonList array
     function loadList(){
         showLoadingGif();
         // Hit pokemon API
@@ -110,6 +118,7 @@ let pokemonRepository = (function(){
         })
     }
 
+    // load individual pokemon details. To be used in modal.
     function loadDetails(item){
         // set url to item url from loadList()
         let url = item.detailsUrl;
@@ -117,37 +126,47 @@ let pokemonRepository = (function(){
         return fetch(url).then(function(response) {
           return response.json();
         }).then(function (details) {
-          // Add the details information to the item. This is utilized in showDetails()
-          item.imageUrl = details.sprites.other.dream_world.front_default;
-          item.id = details.id;
-          item.height = details.height;
-          item.weight = details.weight;
-          item.types = details.types;
+            // Add the details information to the item. This is utilized in showDetails()
+            item.imageUrl = details.sprites.other.dream_world.front_default;
+            item.id = details.id;
+            item.height = details.height;
+            item.weight = details.weight;
+            item.types = details.types;
+            item.abilities = details.abilities;
         }).catch(function (e) {
           console.error(e);
         });
     }
 
+    // 
     function showDetails(pokemon){
         // show pokemon details on click event
         loadDetails(pokemon).then(function(){
+            console.log(pokemon);
             // assign variables to data
-            let title = pokemon.name;
+            let name = pokemon.name;
             let img = pokemon.imageUrl;
             let id = pokemon.id;
             let height = Math.round(pokemon.height * 3.93701);
             let weight = pokemon.weight
             let types = [];
+            let abilities = [];
             // loop through pokemon types array, capitalize each word, push to empty types array above
             pokemon.types.forEach((item)=>{
                 types.push(item.type.name[0].toUpperCase() + item.type.name.slice(1))
             });
+
+            pokemon.abilities.forEach((item)=>{
+                console.log(item);
+                abilities.push(item.ability.name[0].toUpperCase() + item.ability.name.slice(1))
+            });
+            console.log(abilities);
         // pass data into showModal function
-        showModal(title, img, id, height, weight, types);
+        showModal(name, img, id, height, weight, abilities, types);
         });
     }
     
-    function showModal(title, img, id, height, weight, types){
+    function showModal(name, img, id, height, weight, abilities, types){
         let modalBody = document.querySelector('.modal-body');
 
         // clear modal
@@ -168,7 +187,7 @@ let pokemonRepository = (function(){
             divRow.append(divCol);
         }
 
-        // Append img & pokemon attributes to div.cols & add bootstrap classes for grid
+        // add bootstrap classes to new divs.
         let imgCol = document.querySelectorAll('.modal-body div.col-sm-6')[0];
         let attrCol = document.querySelectorAll('.modal-body div.col-sm-6')[1];
         let modalTitle = document.getElementById('modal-title-label');
@@ -176,9 +195,11 @@ let pokemonRepository = (function(){
         let ul = document.createElement('ul');
         ul.setAttribute('id', 'pokemon-attributes');
         imgCol.append(image);
-        imgCol.classList.add('text-center')
+        imgCol.classList.add('text-center');
         attrCol.append(ul);
         attrCol.classList.add('d-flex');
+        attrCol.classList.add('align-self-center');
+        
         // Change how pokemon attr list is styled based on screen size
         if (screen.width < 576){
             attrCol.classList.add('justify-content-center');
@@ -192,10 +213,6 @@ let pokemonRepository = (function(){
                 attrCol.classList.add('justify-content-center');
             }
         });
-       
-        
-        attrCol.classList.add('align-self-center');
-        let pokemonImg = document.querySelector('.modal-body img');
 
         // function to create new list items for pokemon attributes
         function newLi(x){
@@ -204,9 +221,10 @@ let pokemonRepository = (function(){
             let ul = document.getElementById('pokemon-attributes')
             return ul.appendChild(li);
         }
-    
-        // modal body content
-        modalTitle.innerHTML = title;
+
+         // Create modal body content
+        let pokemonImg = document.querySelector('.modal-body img');
+        modalTitle.innerHTML = name;
         pokemonImg.src = img;
         pokemonImg.setAttribute('width', '150px');
         pokemonImg.setAttribute('height', 'auto');
@@ -214,6 +232,7 @@ let pokemonRepository = (function(){
         newLi(`<strong>Height:</strong> <span>${height} inches</span>`);
         newLi(`<strong>Weight:</strong> <span>${weight} lbs</span>`);
         newLi(`<strong>Types:</strong> <span>${types.join(' & ')}</span>`);
+        newLi(`<strong>Abilities:</strong> <span>${abilities.join(', ')}</span>`).classList.add('abilities');
     }
 
    return {
@@ -245,7 +264,7 @@ function sortListAZ(list) {
 
 pokemonRepository.loadList().then(function(){
     let pokemonList = sortListAZ(pokemonRepository.getAll());
-    // loop through pokemonList and display as HTML
+    // loop through pokemonList and display pokemon name on buttons
     pokemonList.forEach(function(pokemon){
         pokemonRepository.addButtons(pokemon);
     });
