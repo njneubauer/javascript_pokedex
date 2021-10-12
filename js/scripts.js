@@ -2,6 +2,38 @@ let pokemonRepository = (function(){
     let pokemonList = [];
     let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=150'
 
+    const searchBar = document.getElementById('search-bar');
+    // Event listener to filter pokemon buttons
+    searchBar.addEventListener('input', filterPokemon);
+
+    function filterPokemon(){
+        let pokemonList = document.querySelectorAll('.list-group-item');
+        // make input lowercase for comparison using indexOf()
+        let filter = searchBar.value.toLowerCase();
+        
+        // filter pokemon by using indexOf function.
+        pokemonList.forEach((pokemon)=>{
+            let pokemonName = pokemon.textContent.toLowerCase();
+
+            if(pokemonName.indexOf(filter)>-1){
+                pokemon.style.display = ''
+            }
+            else {pokemon.style.display = 'none'}
+        });
+    }
+    
+    // Reset search bar
+    let reset = document.getElementById('reset-btn');
+    reset.addEventListener('click', resetFilter);
+
+    function resetFilter(){
+        searchBar.value = '' 
+        let pokemonList = document.querySelectorAll('.group-list-item');
+        pokemonList.forEach((pokemon=>{
+            pokemon.style.display = ''
+        }));
+    }
+        
     function addPokemon(pokemon){
         // Check if pokemon is an object
         if (typeof pokemon !== 'object'){
@@ -12,13 +44,26 @@ let pokemonRepository = (function(){
         pokemonList.push(pokemon);
     }
 
+    function getAll(){
+        // return list of pokemon objects
+        return pokemonList;
+    }
+
     function addButtons(pokemon){
         let name = pokemon.name;
-        let selectUl = document.getElementsByClassName('pokemon-list')[0];
+        let selectUl = document.getElementById('poke-list');
+        selectUl.classList.add('row', 'row-cols-auto')
         let li = document.createElement('li');
-        li.className = 'group-list-item';
+        li.classList.add(
+            'list-group-item',
+            'col'
+            // 'col-xl-3',
+            // 'col-lg-4',
+            // 'col-md-6'
+        );
+
         let button = document.createElement('button');
-        button.className = 'btn-list';
+        button.classList.add('btn','btn-styles');
         button.setAttribute('data-bs-toggle', 'modal');
         button.setAttribute('data-bs-target', '#modal');
         // add event listener to button
@@ -29,11 +74,6 @@ let pokemonRepository = (function(){
         li.appendChild(button);
         // add li element to ul list
         selectUl.appendChild(li);
-    }
-
-    function getAll(){
-        // return list of pokemon objects
-        return pokemonList;
     }
 
     function showLoadingGif(){

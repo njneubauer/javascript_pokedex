@@ -23,29 +23,33 @@ header {
     background-color: var(--body-background);
     top: 0;
     z-index: 2;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 50px;
     text-align: center;
 }
 
-ul.pokemon-list {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-    padding: 0;
-    list-style: none;
-    line-height: 1.75em;
+#title {
+    display: block;
+    width: 100%;
+    text-align: center;
 }
 
-#pokemon-container ul li {
-    margin: 10px 75px;
+.pokemon-logo {
+    height: 90px;
 }
 
-.btn-list {
+nav {
+    height: 55px;
+}
+
+#poke-list li{
+    background-color: transparent;
+    border: none;
+}
+
+#poke-btn-container {
+    padding: 5px 55px 5px 50px;
+}
+
+.btn-styles {
     height: 50px;
     width: 200px;
     font-size: medium;
@@ -59,9 +63,13 @@ ul.pokemon-list {
     text-transform: capitalize;
 }
 
-.btn-list:hover {
+.btn-styles:hover {
     cursor: pointer;
     opacity: .8;
+}
+
+.btn-styles:focus {
+    box-shadow: none;
 }
 
 .loading-icon {
@@ -72,7 +80,7 @@ ul.pokemon-list {
 }
 
 .modal {
-    margin-top: 50px;
+    margin-top: 100px;
 }
 
 .modal-title {

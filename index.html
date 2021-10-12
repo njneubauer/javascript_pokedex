@@ -11,33 +11,36 @@
 </head>
 <body id="body">
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #444;">
+        <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #444;">
             <div class="container-fluid">
-              <img src="img/favicon/favicon.png" width="35px" height="auto" alt="">
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                  </li>
+                </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent"> 
+                <a class="navbar-brand" href="#" style="cursor: default;">
+                    <img src="img/favicon/favicon.png" style="margin: 10px;" width="35px" height="auto" alt="pokeball icon">
+                </a>  
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0"> 
                   <li class="nav-item">
                     <a class="nav-link" href="https://pokeapi.co/">Pok&eacute;mon API</a>
                   </li>
                 </ul>
-                <form class="d-flex">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-primary" type="submit">Search</button>
-                </form>
               </div>
+              <form class="d-flex">
+                <input id="search-bar" class="form-control me-2" type="search" placeholder="Search Pokemon" aria-label="Search Pokemon">
+                <button id="reset-btn" class="btn btn-primary" onclick="this.blur();" type="submit">Reset</button>
+              </form>
+              
             </div>
           </nav>
-        <h1>Pok&eacute;dex</h1>
     </header>
     <main>
-        <div id="pokemon-container">
-            <ul class="pokemon-list"></ul>
+        <div id='title'>
+            <img src="img/svg/pokemon-logo-svg-vector.svg" class="pokemon-logo img-fluid" alt="pokemon logo">
+        </div>
+        
+        <div id='poke-btn-container' class="container-fluid">
+            <ul id="poke-list" class="justify-content-center"></ul>
         </div>
         
         <!-- Modal -->
