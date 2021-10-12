@@ -25,7 +25,11 @@ header {
     z-index: 2;
 }
 
-#title {
+#pokeball-img {
+    margin: 6px 0 0 0;
+}
+
+#title-img {
     display: block;
     width: 100%;
     text-align: center;
@@ -65,8 +69,8 @@ header {
     font-weight: bold;
 }
 
-.btn,button,.btn-styles,.navbar-toggler:focus {
-    box-shadow: none;
+button:focus, .btn:focus .navbar-toggler:focus {
+    box-shadow: none !important;
 }
 
 .loading-icon {
