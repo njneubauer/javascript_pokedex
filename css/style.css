@@ -83,6 +83,7 @@ ul.pokemon-list {
     max-width: 150px;
     width: 100%;
     height: auto;
+    padding: 15px 0;
 }
 
 .modal-body ul {

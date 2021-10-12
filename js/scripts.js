@@ -113,7 +113,7 @@ let pokemonRepository = (function(){
         // clear modal
         modalBody.innerHTML = '';
 
-        // create grid html for modal-body
+        // Create div.container & div.row for bootstrap html grid
         let container = document.createElement('div');
         container.classList.add('container');
         modalBody.append(container);
@@ -121,22 +121,43 @@ let pokemonRepository = (function(){
         divRow.classList.add('row');
         container.append(divRow);
 
+        // Add div.col to div.row
         for(let i=0; i<2; i++){
             let divCol = document.createElement('div');
             divCol.classList.add('col-sm-6');
-            divCol.classList.add('mx-auto');
             divRow.append(divCol);
         }
+
+        // Append img & pokemon attributes to div.cols & add bootstrap classes for grid
         let imgCol = document.querySelectorAll('.modal-body div.col-sm-6')[0];
         let attrCol = document.querySelectorAll('.modal-body div.col-sm-6')[1];
         let modalTitle = document.getElementById('modal-title-label');
         let image = document.createElement('img');
-        let ul = document.createElement('ul')
-        ul.setAttribute('id', 'pokemon-attributes')
+        let ul = document.createElement('ul');
+        ul.setAttribute('id', 'pokemon-attributes');
         imgCol.append(image);
-        attrCol.append(ul)
+        imgCol.classList.add('text-center')
+        attrCol.append(ul);
+        attrCol.classList.add('d-flex');
+        // Change how pokemon attr list is styled based on screen size
+        if (screen.width < 576){
+            attrCol.classList.add('justify-content-center');
+        }
+        else {
+            attrCol.classList.add('justify-content-start');
+        }
+        window.addEventListener('resize', function(){
+            if (screen.width < 576){
+                attrCol.classList.remove('justify-content-start');
+                attrCol.classList.add('justify-content-center');
+            }
+        });
+       
+        
+        attrCol.classList.add('align-self-center');
         let pokemonImg = document.querySelector('.modal-body img');
 
+        // function to create new list items for pokemon attributes
         function newLi(x){
             let li = document.createElement('li');
             li.innerHTML = x;
@@ -144,7 +165,7 @@ let pokemonRepository = (function(){
             return ul.appendChild(li);
         }
     
-        // modal content
+        // modal body content
         modalTitle.innerHTML = title;
         pokemonImg.src = img;
         pokemonImg.setAttribute('width', '150px');
