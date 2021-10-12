@@ -31,30 +31,6 @@ header h1 {
     text-align: center;
 }
 
-nav ul {
-    display: flex;
-    justify-content: flex-end;
-    flex: 1 1 auto;
-    margin-right: 125px;
-}
-
-nav ul li {
-    margin: 10px 20px;
-    list-style: none;
-    font-weight: bold;
-}
-
-nav li a {
-    color: var(--nav-text);
-    text-decoration: none;
-}
-
-nav li a:hover {
-    color: var(--nav-hover);
-    padding-bottom: 10px;
-    text-decoration: underline;
-}
-
 ul.pokemon-list {
     display: flex;
     flex-wrap: wrap;
@@ -69,7 +45,7 @@ ul.pokemon-list {
     margin: 10px 75px;
 }
 
-button {
+.btn-list {
     height: 50px;
     width: 200px;
     font-size: medium;
@@ -83,7 +59,7 @@ button {
     text-transform: capitalize;
 }
 
-button:hover {
+.btn-list:hover {
     cursor: pointer;
     opacity: .8;
 }
@@ -95,103 +71,24 @@ button:hover {
     transform: translate(-50%, -50%);
 }
 
-#modal-container {
-    display: none;
-}
-
-#modal-container.is-visible {
-    position: fixed;
-    padding: 20px;
-    box-sizing: border-box;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--modal-background);
-
-    /* to show it above other content */
-    z-index: 999; 
-
-    /* to allow scrolling if the screen is not high enough*/
-    overflow: auto; 
-
-    /* this is used to center the modal */
-    display: grid;
-    text-align: center;
-}
-
 .modal {
-    margin: auto;
-    display: inline-block;
-    box-sizing: border-box;
-    background: var(--modal-display);
-    padding: 15px;
-    width: 100%;
-    max-width: 500px;
-    text-align: left;
+    margin-top: 50px;
 }
 
-.modal-close {
-    float: right;
-    height: 50px;
-    width: 50px;
-    padding-bottom: 10px;
-    border: 0;
-    background: none;
-    color: var(--modal-close);
-}
-
-.modal-header h1 {
-    margin-top: 0;
-    margin-left: 5px;
-    margin-bottom: 15px;
+.modal-title {
     text-transform: capitalize;
 }
 
-.modal img {
-    float: left;
+.modal-body img {
     max-width: 150px;
     width: 100%;
     height: auto;
-    margin-right: 10px;
-    padding: 15px 0;
 }
 
-.modal-body {
-    display: flex;
-    justify-content: center;
-    border-top: 1px solid var(--modal-top-bottom-border);
-    border-bottom: 1px solid var(--modal-top-bottom-border);
-}
-
-.modal ul {
-    display: flex;
-    flex-direction: column;
-    align-self: center;
+.modal-body ul {
+    margin: 0;
+    padding: 0;
+    text-align: left;
     list-style-type: none;
-    line-height: 2rem;
-}
-
-.modal-footer {
-    text-align: center;
-}
-
-.modal-button-close {
-    border: none;
-    width: 100px;
-    height: 40px;
-    margin-top: 10px;
-}
-
-@media all and (max-width: 426px) {
-    .modal img {
-        margin-right: 10px
-    }
-
-    nav ul {
-        margin: 10px;
-        padding: 0;
-        justify-content: center;
-        align-items: center;
-    }
+    line-height: 2rem; 
 }
