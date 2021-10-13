@@ -164,39 +164,13 @@ let pokemonRepository = (function(){
     }
     
     function showModal(name, img, id, height, weight, abilities, types){
-        let modalBody = document.querySelector('.modal-body');
-
-        // clear modal
-        modalBody.innerHTML = '';
-
-        // Create div.container & div.row for bootstrap html grid
-        let container = document.createElement('div');
-        container.classList.add('container');
-        modalBody.append(container);
-        let divRow = document.createElement('div');
-        divRow.classList.add('row');
-        container.append(divRow);
-
-        // Add div.col to div.row
-        for(let i=0; i<2; i++){
-            let divCol = document.createElement('div');
-            divCol.classList.add('col-sm-6');
-            divRow.append(divCol);
-        }
-
-        // add bootstrap classes to new divs.
-        let imgCol = document.querySelectorAll('.modal-body div.col-sm-6')[0];
-        let attrCol = document.querySelectorAll('.modal-body div.col-sm-6')[1];
-        let modalTitle = document.getElementById('modal-title-label');
-        let image = document.createElement('img');
-        let ul = document.createElement('ul');
-        ul.setAttribute('id', 'pokemon-attributes');
-        imgCol.append(image);
-        imgCol.classList.add('text-center');
-        attrCol.append(ul);
-        attrCol.classList.add('d-flex');
-        attrCol.classList.add('align-self-center');
+        let modalImg= document.querySelector('#modal-img');
+        let modalAttr = document.querySelector('#pokemon-attributes');
         
+        // clear modal
+        modalAttr.innerHTML = '';
+        modalImg.innerHTML = '';
+
         // get screen width
         function screenWidth(){
             let screenWidth = window.innerWidth
@@ -204,7 +178,8 @@ let pokemonRepository = (function(){
             || document.body.clientWidth;
             return screenWidth;
         }
-
+        // select attributes div to add class based on screen size
+        let attrCol = document.querySelector('#modal-attr');
         // Change how pokemon attr list is styled based on screen size
         if (screenWidth() < 576){
             attrCol.classList.add('justify-content-center');
@@ -228,7 +203,9 @@ let pokemonRepository = (function(){
         }
 
          // Create modal body content
-        let pokemonImg = document.querySelector('.modal-body img');
+        let modalTitle = document.getElementById('modal-title-label');
+        let pokemonImg = document.querySelector('#modal-img');
+        console.log(pokemonImg)
         modalTitle.innerHTML = name;
         pokemonImg.src = img;
         pokemonImg.setAttribute('width', '150px');
