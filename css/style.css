@@ -40,7 +40,7 @@ header {
     height: 90px;
 }
 
-#poke-list li{
+#pokemon-btn-list li{
     background-color: transparent;
     border: none;
 }

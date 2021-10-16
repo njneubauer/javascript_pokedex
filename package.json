@@ -1,0 +1,26 @@
+{
+  "name": "javascript_pokedex",
+  "version": "1.0.0",
+  "description": "* To build a small web applicatrion with HTML, CSS, and JavaScript that laods data from an external API that enables the viewing of data in detail",
+  "main": "index.js",
+  "dependencies": {
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.25.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/njneubauer/javascript_pokedex.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/njneubauer/javascript_pokedex/issues"
+  },
+  "homepage": "https://github.com/njneubauer/javascript_pokedex#readme"
+}
