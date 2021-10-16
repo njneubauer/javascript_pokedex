@@ -103,7 +103,6 @@ const pokemonRepository = (function(){
     function loadList(){
         showLoadingGif();
         // Hit pokemon API
-        console.log('hit api');
         return fetch(apiUrl).then(function(response){
             return response.json();
         }).then(function(json){
