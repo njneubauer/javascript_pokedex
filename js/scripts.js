@@ -5,9 +5,13 @@ const pokemonRepository = (function(){
     // select search bar
     const searchBar = document.getElementById('search-bar');
 
-    // Event listener to filter pokemon buttons
+    // event listener to filter pokemon buttons
     searchBar.addEventListener('input', filterPokemon);
-    
+    //stop form from reloading page on submit 
+    const form = document.querySelector('#searchbar-form');
+    form.addEventListener('submit', function(e){
+        e.preventDefault();
+    });
     // filter pokemon based on input from user
     function filterPokemon(){
         let pokemonList = document.querySelectorAll('.list-group-item');
@@ -17,20 +21,21 @@ const pokemonRepository = (function(){
         // filter pokemon by using indexOf function.
         pokemonList.forEach((pokemon)=>{
             let pokemonName = pokemon.textContent.toLowerCase();
-
             if(pokemonName.indexOf(filter)>-1){
                 pokemon.style.display = '';
             }
             else { pokemon.style.display = 'none'; }
         });
     }
+
     // reset search bar event listener
     let reset = document.getElementById('reset-btn');
     reset.addEventListener('click', resetFilter);
+   
     // reset search bar filter
     function resetFilter(){
         searchBar.value = '';
-        let pokemonList = document.querySelectorAll('.group-list-item');
+        let pokemonList = document.querySelectorAll('.list-group-item');
         pokemonList.forEach(function(pokemon){
             pokemon.style.display = '';
         });
@@ -98,6 +103,7 @@ const pokemonRepository = (function(){
     function loadList(){
         showLoadingGif();
         // Hit pokemon API
+        console.log('hit api');
         return fetch(apiUrl).then(function(response){
             return response.json();
         }).then(function(json){
