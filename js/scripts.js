@@ -1,13 +1,13 @@
-let pokemonRepository = (function(){
+const pokemonRepository = (function(){
     let pokemonList = [];
-    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=150'
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=150';
 
     // select search bar
     const searchBar = document.getElementById('search-bar');
 
     // Event listener to filter pokemon buttons
     searchBar.addEventListener('input', filterPokemon);
-
+    
     // filter pokemon based on input from user
     function filterPokemon(){
         let pokemonList = document.querySelectorAll('.list-group-item');
@@ -19,31 +19,29 @@ let pokemonRepository = (function(){
             let pokemonName = pokemon.textContent.toLowerCase();
 
             if(pokemonName.indexOf(filter)>-1){
-                pokemon.style.display = ''
+                pokemon.style.display = '';
             }
-            else {pokemon.style.display = 'none'}
+            else { pokemon.style.display = 'none'; }
         });
     }
-    
     // reset search bar event listener
     let reset = document.getElementById('reset-btn');
     reset.addEventListener('click', resetFilter);
-
     // reset search bar filter
     function resetFilter(){
-        searchBar.value = '' 
+        searchBar.value = '';
         let pokemonList = document.querySelectorAll('.group-list-item');
-        pokemonList.forEach((pokemon=>{
-            pokemon.style.display = ''
-        }));
+        pokemonList.forEach(function(pokemon){
+            pokemon.style.display = '';
+        });
     }
     
     // add pokemon to pokemonList array
     function addPokemon(pokemon){
         // Check if pokemon is an object
         if (typeof pokemon !== 'object'){
-            alert('input not an object')
-            return
+            alert('input not an object');
+            return;
         }
         // add pokemon object to list
         pokemonList.push(pokemon);
@@ -57,9 +55,9 @@ let pokemonRepository = (function(){
     // add buttons with pokemon name
     function addButtons(pokemon){
         let name = pokemon.name;
-        let selectUl = document.getElementById('poke-list');
+        let selectUl = document.getElementById('pokemon-btn-list');
         // add classes to ul for bootstrap
-        selectUl.classList.add('row', 'row-cols-auto')
+        selectUl.classList.add('row', 'row-cols-auto');
         let li = document.createElement('li');
         // add classes to each li for bootstrap
         li.classList.add(
@@ -74,7 +72,7 @@ let pokemonRepository = (function(){
         button.setAttribute('data-bs-toggle', 'modal');
         button.setAttribute('data-bs-target', '#modal');
         // add event listener to button
-        button.addEventListener('click', function(){showDetails(pokemon)});
+        button.addEventListener('click', function(){ showDetails(pokemon); });
         // add name to button
         button.innerText = name;
         // add button to li element
@@ -84,7 +82,7 @@ let pokemonRepository = (function(){
     }
 
     function showLoadingGif(){
-        let loadingGif = "img/gifs/BeanEater200px.gif";
+        let loadingGif = 'img/gifs/BeanEater200px.gif';
         let img = document.createElement('img');
         img.src = loadingGif;
         img.className = 'loading-icon';
@@ -115,7 +113,7 @@ let pokemonRepository = (function(){
         }).catch(function(e){
             hideLoadingGif();
             console.error(e);
-        })
+        });
     }
 
     // load individual pokemon details. To be used in modal.
@@ -147,16 +145,16 @@ let pokemonRepository = (function(){
             let img = pokemon.imageUrl;
             let id = pokemon.id;
             let height = Math.round(pokemon.height * 3.93701);
-            let weight = pokemon.weight
+            let weight = pokemon.weight;
             let types = [];
             let abilities = [];
             // loop through pokemon types array, capitalize each word, push to empty types array above
             pokemon.types.forEach((item)=>{
-                types.push(item.type.name[0].toUpperCase() + item.type.name.slice(1))
+                types.push(item.type.name[0].toUpperCase() + item.type.name.slice(1));
             });
 
             pokemon.abilities.forEach((item)=>{
-                abilities.push(item.ability.name[0].toUpperCase() + item.ability.name.slice(1))
+                abilities.push(item.ability.name[0].toUpperCase() + item.ability.name.slice(1));
             });
         // pass data into showModal function
         showModal(name, img, id, height, weight, abilities, types);
@@ -164,13 +162,6 @@ let pokemonRepository = (function(){
     }
     
     function showModal(name, img, id, height, weight, abilities, types){
-        let modalImg= document.querySelector('#modal-img');
-        let modalAttr = document.querySelector('#pokemon-attributes');
-        
-        // clear modal
-        modalAttr.innerHTML = '';
-        modalImg.innerHTML = '';
-
         // get screen width
         function screenWidth(){
             let screenWidth = window.innerWidth
@@ -198,14 +189,13 @@ let pokemonRepository = (function(){
         function newLi(x){
             let li = document.createElement('li');
             li.innerHTML = x;
-            let ul = document.getElementById('pokemon-attributes')
+            let ul = document.getElementById('pokemon-attributes');
             return ul.appendChild(li);
         }
 
          // Create modal body content
         let modalTitle = document.getElementById('modal-title-label');
         let pokemonImg = document.querySelector('#modal-img');
-        console.log(pokemonImg)
         modalTitle.innerHTML = name;
         pokemonImg.src = img;
         pokemonImg.setAttribute('width', '150px');
@@ -216,6 +206,16 @@ let pokemonRepository = (function(){
         newLi(`<strong>Types:</strong> <span>${types.join(' & ')}</span>`);
         newLi(`<strong>Abilities:</strong> <span>${abilities.join(', ')}</span>`).classList.add('abilities');
     }
+
+    // event listener to clear modal after modal is closed by the user
+    let modal = document.getElementById('modal');
+    modal.addEventListener('hidden.bs.modal', ()=>{
+        let modalImg= document.querySelector('#modal-img');
+        let modalAttr = document.querySelector('#pokemon-attributes');
+        // clear modal
+        modalAttr.innerHTML = '';
+        modalImg.src = '';
+    });
 
    return {
     addPokemon: addPokemon,
@@ -229,8 +229,8 @@ let pokemonRepository = (function(){
 
 function sortListAZ(list) {
     let sorted = list.sort(function(a,b){
-        let nameA = a.name
-        let nameB = b.name
+        let nameA = a.name;
+        let nameB = b.name;
         if (nameA < nameB){
             return -1;
         }
@@ -242,7 +242,7 @@ function sortListAZ(list) {
         }
     });
     return sorted;
-};
+}
 
 pokemonRepository.loadList().then(function(){
     let pokemonList = sortListAZ(pokemonRepository.getAll());
