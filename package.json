@@ -22,5 +22,7 @@
   "bugs": {
     "url": "https://github.com/njneubauer/javascript_pokedex/issues"
   },
-  "homepage": "https://github.com/njneubauer/javascript_pokedex#readme"
+  "homepage": "https://github.com/njneubauer/javascript_pokedex#readme",
+
+  "eslintIgnore":["scripts.min.js"]
 }
